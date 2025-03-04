@@ -11,7 +11,9 @@ class BlaLocationPicker extends StatefulWidget {
   final Location?
       initLocation; // The picker can be triguer with an existing location name
 
-  const BlaLocationPicker({super.key, this.initLocation});
+  final LocationsService locationsService;
+
+  const BlaLocationPicker({super.key, this.initLocation, required this.locationsService});  
 
   @override
   State<BlaLocationPicker> createState() => _BlaLocationPickerState();
@@ -55,7 +57,7 @@ class _BlaLocationPickerState extends State<BlaLocationPicker> {
   }
 
   List<Location> getLocationsFor(String text) {
-    return LocationsService.availableLocations
+    return widget.locationsService.availableLocations
         .where((location) =>
             location.name.toUpperCase().contains(text.toUpperCase()))
         .toList();

@@ -8,6 +8,7 @@ import '../../utils/animations_util.dart';
 import '../rides/rides_screen.dart';
 import 'widgets/ride_pref_form.dart';
 import 'widgets/ride_pref_history_tile.dart';
+import '../../service/locations_service.dart';
 
 const String blablaHomeImagePath = 'assets/images/blabla_home.png';
 
@@ -17,7 +18,9 @@ const String blablaHomeImagePath = 'assets/images/blabla_home.png';
 /// - Or select a last entered ride preferences and launch a search on it
 ///
 class RidePrefScreen extends StatefulWidget {
-  const RidePrefScreen({super.key});
+  const RidePrefScreen({super.key, required this.locationsService});
+
+  final LocationsService locationsService;
 
   @override
   State<RidePrefScreen> createState() => _RidePrefScreenState();
@@ -68,7 +71,11 @@ class _RidePrefScreenState extends State<RidePrefScreen> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   // 2.1 Display the Form to input the ride preferences
-                  RidePrefForm(initialPreference: currentRidePreference, onSubmit: onRidePrefSelected),
+                  RidePrefForm(
+                    initialPreference: currentRidePreference,
+                    onSubmit: onRidePrefSelected,
+                    locationsService: widget.locationsService,
+                    ),
                   SizedBox(height: BlaSpacings.m),
 
                   // 2.2 Optionally display a list of past preferences

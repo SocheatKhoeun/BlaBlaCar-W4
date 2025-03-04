@@ -9,6 +9,7 @@ import '../../../widgets/actions/bla_button.dart';
 import '../../../widgets/display/bla_divider.dart';
 import '../../../widgets/inputs/bla_location_picker.dart';
 import 'ride_pref_input_tile.dart';
+import '../../../service/locations_service.dart';
 
 ///
 /// A Ride Preference From is a view to select:
@@ -20,8 +21,9 @@ import 'ride_pref_input_tile.dart';
 /// The form can be created with an existing RidePref (optional).
 ///
 class RidePrefForm extends StatefulWidget {
-  const RidePrefForm( {super.key, required this.initialPreference, required this.onSubmit});
+  const RidePrefForm( {super.key, required this.locationsService, required this.initialPreference, required this.onSubmit});
 
+  final LocationsService locationsService;
   final RidePreference? initialPreference;
   final Function(RidePreference preference) onSubmit;
 
@@ -67,6 +69,7 @@ class _RidePrefFormState extends State<RidePrefForm> {
     Location? selectedLocation = await Navigator.of(context)
         .push<Location>(AnimationUtils.createBottomToTopRoute(BlaLocationPicker(
       initLocation: departure,
+      locationsService: widget.locationsService,
     )));
 
     // 2- Update the from if needed
@@ -82,6 +85,7 @@ class _RidePrefFormState extends State<RidePrefForm> {
     Location? selectedLocation = await Navigator.of(context)
         .push<Location>(AnimationUtils.createBottomToTopRoute(BlaLocationPicker(
       initLocation: arrival,
+      locationsService: widget.locationsService,
     )));
 
     // 2- Update the from if needed
