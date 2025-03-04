@@ -7,14 +7,16 @@ class User {
   final String email;
   final String phone;
   final String profilePicture;
-
   final bool verifiedProfile;
+  final bool acceptsPets;  // Add this field to track pet acceptance
 
-  User(
-      {required this.firstName,
-      required this.lastName,
-      required this.email,
-      required this.phone,
-      required this.profilePicture,
-      required this.verifiedProfile});
+  User({
+    required this.firstName,
+    required this.lastName,
+    required this.email,
+    required this.phone,
+    required this.profilePicture,
+    required this.verifiedProfile,
+    this.acceptsPets = false,  // Default to false if not specified
+  });
 }
